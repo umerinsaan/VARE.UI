@@ -1,0 +1,63 @@
+<!-- app.component.html -->
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+    <h2>Scans</h2>
+    <button pButton label="New Scan" icon="pi pi-plus" (click)="openNewScanDialog()"></button>
+</div>
+
+<p-table [value]="Scans" *ngIf="loading == false">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>IP Address</th>
+            <th>Scan Name</th>
+            <th>Scan Started At</th>
+            <th>Scan Finished At</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-scan>
+        <tr>
+            <td>{{ scan.ip }}</td>
+            <td>
+                <a [routerLink]="['/scan', scan.id, scan.ip]" style="cursor: pointer; text-decoration: underline;">
+                    {{ scan.scanName }}
+                </a>
+            </td>
+            <td>{{ scan.scanStartedAt | date:'short' }}</td>
+            <td>{{ scan.scanFinishedAt | date:'short' }}</td>
+        </tr>
+
+    </ng-template>
+
+</p-table>
+
+<p-table [value]="Scans" *ngIf="loading == true">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>IP Address</th>
+            <th>Scan Name</th>
+            <th>Scan Started At</th>
+            <th>Scan Finished At</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-scan>
+        <tr>
+            <td><p-skeleton></p-skeleton></td>
+            <td><p-skeleton></p-skeleton></td>
+            <td><p-skeleton></p-skeleton></td>
+            <td><p-skeleton></p-skeleton></td>
+        </tr>
+
+    </ng-template>
+
+</p-table>
+
+<p-dialog header="New Scan" [(visible)]="displayDialog" [modal]="true" [closable]="true">
+    <div class="p-field">
+        <label for="ip">Enter IP: </label>
+        <input id="ip" type="text" [(ngModel)]="newScanIp" pInputText />
+    </div>
+    <div style="margin-top: 0.5rem; display: flex; justify-content: center; align-items: center; gap: 0.25rem;">
+        <button pButton label="Cancel" icon="pi pi-times" (click)="closeDialog()"></button>
+
+        <button pButton label="Start Scan" icon="pi pi-check" (click)="createScan()"></button>
+    </div>
+</p-dialog>

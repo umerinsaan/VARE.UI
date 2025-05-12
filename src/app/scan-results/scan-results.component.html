@@ -1,0 +1,18 @@
+<div class="flex">
+    <!-- Sidebar Menu -->
+    <p-panelMenu [model]="toolMenu" class="w-2/12 min-w-[200px] mr-4"></p-panelMenu>
+
+    <!-- Main Content -->
+    <div class="flex-1">
+        <div class="mb-4">
+            <h2 class="text-xl font-semibold">Scan on IP: {{ ip }}</h2>
+            <p class="text-sm text-gray-600">Command: <code>{{ selectedExecution?.command }}</code></p>
+        </div>
+
+        <p-card *ngIf="selectedExecution">
+            <pre style="white-space: pre-wrap;">{{ selectedExecution.output }}</pre>
+        </p-card>
+
+        <p *ngIf="!selectedExecution">Select a tool from the left to view its output.</p>
+    </div>
+</div>

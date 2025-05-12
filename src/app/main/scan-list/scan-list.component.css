@@ -1,0 +1,18 @@
+/* app.component.css */
+p-table {
+  width: 100%;
+}
+
+.p-dialog .p-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.p-dialog {
+  max-width: 500px;
+}
+
+a {
+    color: black;
+
+}
